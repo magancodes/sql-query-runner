@@ -1,0 +1,77 @@
+.theme-dropdown {
+  position: relative;
+}
+
+.theme-toggle-button {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle-button:hover {
+  background-color: var(--muted);
+}
+
+.sun-icon {
+  height: 1.2rem;
+  width: 1.2rem;
+  transition: all 0.2s;
+}
+
+.moon-icon {
+  position: absolute;
+  height: 1.2rem;
+  width: 1.2rem;
+  transform: rotate(90deg) scale(0);
+  transition: all 0.2s;
+}
+
+:root.dark .sun-icon {
+  transform: rotate(-90deg) scale(0);
+}
+
+:root.dark .moon-icon {
+  transform: rotate(0) scale(1);
+}
+
+.theme-dropdown-content {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  width: 8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.theme-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.theme-option:hover {
+  background-color: var(--muted);
+}
+
+.theme-option.active {
+  background-color: var(--muted);
+  font-weight: 500;
+}
+

@@ -1,0 +1,224 @@
+<template>
+  <div class="app" :class="{ 'dark-mode': isDarkMode }">
+    <header class="header">
+      <div class="container">
+        <h1>SQL Query Runner</h1>
+        <p>Run SQL queries and visualize results instantly</p>
+        <button class="theme-toggle" @click="toggleDarkMode">
+          {{ isDarkMode ? '☀️' : '🌙' }}
+        </button>
+      </div>
+    </header>
+    <main class="container">
+      <router-view :isDarkMode="isDarkMode" />
+    </main>
+  </div>
+</template>
+
+<script setup>
+import { ref, provide } from 'vue';
+
+const isDarkMode = ref(false);
+
+// Provide dark mode state to all components
+provide('isDarkMode', isDarkMode);
+
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+  localStorage.setItem('dark-mode', isDarkMode.value ? 'true' : 'false');
+};
+
+// Check for saved theme preference or prefer-color-scheme
+if (typeof window !== 'undefined') {
+  const savedTheme = localStorage.getItem('dark-mode');
+  if (savedTheme) {
+    isDarkMode.value = savedTheme === 'true';
+  } else {
+    isDarkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+}
+</script>
+
+<style>
+:root {
+  --background-color: #f5f7fa;
+  --foreground-color: #333333;
+  --primary-color: #3b82f6;
+  --primary-hover-color: #2563eb;
+  --secondary-color: #e2e8f0;
+  --secondary-hover-color: #cbd5e1;
+  --border-color: #e2e8f0;
+  --card-background: #ffffff;
+  --muted-color: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent-color: #f1f5f9;
+  --accent-foreground: #1e293b;
+  --destructive-color: #ef4444;
+  --destructive-foreground: #ffffff;
+  --input-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --code-background: #f8fafc;
+  --table-header-background: #f8fafc;
+  --table-row-alternate: #f8fafc;
+  --table-border: #e2e8f0;
+  --success-color: #10b981;
+  --success-hover-color: #059669;
+  --warning-color: #f59e0b;
+  --warning-hover-color: #d97706;
+}
+
+.dark-mode {
+  --background-color: #1e293b;
+  --foreground-color: #f8fafc;
+  --primary-color: #3b82f6;
+  --primary-hover-color: #60a5fa;
+  --secondary-color: #334155;
+  --secondary-hover-color: #475569;
+  --border-color: #334155;
+  --card-background: #0f172a;
+  --muted-color: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent-color: #334155;
+  --accent-foreground: #f8fafc;
+  --destructive-color: #ef4444;
+  --destructive-foreground: #ffffff;
+  --input-background: #1e293b;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --code-background: #0f172a;
+  --table-header-background: #1e293b;
+  --table-row-alternate: #1e293b;
+  --table-border: #334155;
+  --success-color: #10b981;
+  --success-hover-color: #059669;
+  --warning-color: #f59e0b;
+  --warning-hover-color: #d97706;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  line-height: 1.5;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  padding: 2rem 0;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: var(--muted-foreground);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  z-index: 100;
+  transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--secondary-color);
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s, border-color 0.2s;
+  border: 1px solid transparent;
+}
+
+.primary-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.primary-button:hover:not(:disabled) {
+  background-color: var(--primary-hover-color);
+}
+
+.secondary-button {
+  background-color: var(--secondary-color);
+  color: var(--foreground-color);
+  border: 1px solid var(--border-color);
+}
+
+.secondary-button:hover:not(:disabled) {
+  background-color: var(--secondary-hover-color);
+}
+
+.success-button {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.success-button:hover:not(:disabled) {
+  background-color: var(--success-hover-color);
+}
+
+.warning-button {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.warning-button:hover:not(:disabled) {
+  background-color: var(--warning-hover-color);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon {
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+}
+</style>
+

@@ -1,0 +1,74 @@
+<template>
+  <div class="query-selector">
+    <label for="query-select" class="selector-label">
+      Select a predefined query:
+    </label>
+    <select 
+      id="query-select" 
+      class="selector-dropdown" 
+      :value="selectedId" 
+      @change="handleChange"
+    >
+      <option 
+        v-for="query in queries" 
+        :key="query.id" 
+        :value="query.id"
+      >
+        {{ query.name }}
+      </option>
+    </select>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  queries: {
+    type: Array,
+    required: true
+  },
+  selectedId: {
+    type: String,
+    required: true
+  }
+});
+
+const emit = defineEmits(['select']);
+
+const handleChange = (event) => {
+  emit('select', event.target.value);
+};
+</script>
+
+<style>
+.query-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.selector-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.selector-dropdown {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-background);
+  color: var(--foreground-color);
+  font-size: 0.875rem;
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+}
+
+.selector-dropdown:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 1px;
+}
+</style>
+
