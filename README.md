@@ -1,6 +1,4 @@
-Here’s a **well-designed** `README.md` with **better formatting, icons, and a structured layout** to make it **more visually appealing** and easier to read.  
 
----
 # 🚀 SQL Query Application  
 
 A high-performance SQL query application built with **Next.js, Prisma, and PostgreSQL**, optimized for speed, scalability, and developer experience.  
