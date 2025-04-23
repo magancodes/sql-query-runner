@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "SQL Query Runner with Visualization",
   description: "Run SQL queries and visualize results instantly",
-    generator: 'v0.dev'
+    generator: 'magan'
 }
 
 export default function RootLayout({
