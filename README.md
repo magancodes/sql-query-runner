@@ -7,20 +7,7 @@ A high-performance SQL query application built with **Next.js, Prisma, and Postg
 
 ---
 
-## ⚡️ Performance Optimizations  
-
-### 🔹 1. Server Components  
-✅ **Reduces client-side JavaScript**  
-✅ **Improves initial load time**  
-✅ **Static UI parts rendered on the server**  
-
-### 🔹 2. Persistent Caching  
-✅ **Uses Turbopack’s caching** for faster rebuilds  
-✅ **Minimizes redundant compilation**  
-
-### 🔹 3. Route-based Code Splitting  
-✅ **Automatic Next.js code-splitting**  
-✅ **Only loads necessary page code**  
+  
 
 
 ---
